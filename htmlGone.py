@@ -2,8 +2,8 @@ from bs4 import BeautifulSoup
 
 def remove_html_tags(html):
     soup = BeautifulSoup(html, 'html.parser')
-    # Extract text from the HTML
-    text = soup.get_text()
+    # Extract text from the HTML and remove leading/trailing whitespace
+    text = soup.get_text(strip=True)
     return text
 
 def fix_links(links):
@@ -11,10 +11,10 @@ def fix_links(links):
     for text, link in links:
         if link.startswith('/'):
             # Add 'towson.edu' to links that start with '/'
-            fixed_link = f"https://towson.edu{link}"
+            fixed_link = f"https://towson.edu{link.strip()}"
         else:
-            fixed_link = link
-        fixed_links.append((text, fixed_link))
+            fixed_link = link.strip()
+        fixed_links.append((text.strip(), fixed_link))
     return fixed_links
 
 def extract_links(html):
@@ -22,7 +22,7 @@ def extract_links(html):
     # Find all <a> tags
     links = soup.find_all('a')
     # Extract href attribute from each <a> tag along with the text it was extracted from
-    link_text_list = [(link.get_text(), link.get('href')) for link in links]
+    link_text_list = [(link.get_text(strip=True), link.get('href')) for link in links]
     return link_text_list
 
 def main():
@@ -35,13 +35,13 @@ def main():
         with open(input_file, "r", encoding="utf-8") as file:
             html_content = file.read()
 
-        # Remove HTML tags
+        # Remove HTML tags and leading/trailing whitespace
         cleaned_text = remove_html_tags(html_content)
 
         # Extract links along with the text they were extracted from
         link_text_list = extract_links(html_content)
         
-        # Fix links
+        # Fix links and remove leading/trailing whitespace
         fixed_links = fix_links(link_text_list)
 
         # Write cleaned text and links to output file
