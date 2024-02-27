@@ -27,9 +27,9 @@ def extract_links(html):
 
 def main():
     # Input file containing HTML content
-    input_file = "Colleges & Departments _ Towson University.html"
+    input_file = "Faculty_Staff Search-i - Towson University.html"
     # Output file where cleaned text and links will be stored
-    output_file = "Colleges & Departments _ Towson University_Cleaned.txt"
+    output_file = "Faculty_Staff Search-i - Towson University_Cleaned.txt"
 
     try:
         with open(input_file, "r", encoding="utf-8") as file:
