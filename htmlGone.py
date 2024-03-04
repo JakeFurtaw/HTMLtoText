@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import re
 
-
 def remove_html_tags(html):
     soup = BeautifulSoup(html, 'html.parser')
     # Extract text from the HTML
