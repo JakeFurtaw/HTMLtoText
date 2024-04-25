@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 
 # Provide the path to your local HTML file
-file_path = "your file here
+file_path = "your file path here"
 
 # Open the file and read its content
 with open(file_path, "r", encoding="utf-8") as file:
